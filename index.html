@@ -10,7 +10,60 @@
       font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 2em;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Fixed Dropdown Menu */
+    .menu-container {
+      position: fixed;
+      top: 1em;
+      right: 1em;
+      z-index: 1000;
+    }
+
+    .menu-button {
+      background-color: #00ffff;
+      color: #0f0f0f;
+      border: none;
+      padding: 0.6em 1.2em;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 3em;
+      right: 0;
+      background-color: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.1);
+      padding: 1em;
+      min-width: 200px;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      color: #e0e0e0;
+      text-decoration: none;
+      font-weight: bold;
+      margin-bottom: 0.8em;
+      transition: color 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+      color: #00ffff;
+    }
+
+    /* Main content */
+    .main-content {
       text-align: center;
+      margin-top: 5em;
     }
 
     h1 {
@@ -27,12 +80,6 @@
       font-size: 1.2em;
       max-width: 700px;
       margin: 0 auto 1em;
-    }
-
-    a {
-      color: #00ffff;
-      text-decoration: none;
-      font-weight: bold;
     }
 
     .projects-container {
@@ -81,87 +128,67 @@
       cursor: pointer;
     }
 
-    /* Modal overlay */
-    #tutorialModal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.9);
-      z-index: 9999;
-      padding: 2em;
-      overflow: auto;
-    }
-
-    #tutorialModal .modal-content {
-      background-color: #1a1a1a;
-      color: #e0e0e0;
-      max-width: 700px;
-      margin: auto;
-      padding: 2em;
-      border-radius: 8px;
-      box-shadow: 0 0 20px #00ffff;
-    }
-
-    #tutorialModal h2 {
-      color: #00ffff;
-      margin-top: 0;
+    footer {
+      margin-top: 4em;
+      font-size: 0.9em;
+      color: #888;
+      text-align: center;
     }
   </style>
 </head>
 <body>
 
-  <h1>Echo0bsidian</h1>
-  <p><em>Helping non-technical users unlock powerful workflows</em></p>
-
-  <h2> Featured Projects</h2>
-  <div class="projects-container">
-
-    <!-- Project Card: Macro + Download -->
-    <div class="project-card">
-      <h3>Word-KeywordInjector</h3>
-      <p>A beginner-friendly macro that embeds hidden keywords into Word footers for resume optimization. No coding required.</p>
-      <a href="Word-KeywordInjector.txt" download class="btn">📥 Download Macro</a>
-      <a href="https://github.com/Echo0bsidian/Word-KeywordInjector" target="_blank" class="btn">🔗 View on GitHub</a>
-    </div>
-
-    <!-- Project Card: Tutorial Popup -->
-    <div class="project-card">
-      <h3>Word-KeywordInjector Tutorial</h3>
-      <p>Step-by-step instructions for using the macro to embed hidden keywords.</p>
-      <button onclick="openModal()" class="btn">📘 View Tutorial</button>
-    </div>
-
-  </div>
-
-  <h2> About Me</h2>
-  <p>Hi! I make tools that help people automate boring stuff—especially if you’re not a coder. If you’ve ever felt stuck in Word or Excel, I’ve got your back. My goal is to make powerful workflows accessible to everyone, whether you're building a resume or just trying to save time.</p>
-
-  <footer>
-    Built with clarity · Shared with purpose · Echo0bsidian
-  </footer>
-
-  <!-- Tutorial Modal -->
-  <div id="tutorialModal">
-    <div class="modal-content">
-      <h2>Word-KeywordInjector Tutorial</h2>
-      <p>This tutorial is hosted on GitHub. Click below to view the full guide:</p>
-      <p>
-        <a href="https://github.com/Echo0bsidian/Word-KeywordInjector/wiki" target="_blank" class="btn">
-           Open Wiki Tutorial
-        </a>
-      </p>
-      <button onclick="closeModal()" class="btn">Close</button>
+  <!-- Fixed Dropdown Menu -->
+  <div class="menu-container">
+    <button class="menu-button" onclick="toggleMenu()">☰ Projects</button>
+    <div class="dropdown-menu" id="dropdownMenu">
+      <a href="injector.html">KeywordInjector</a>
+      <a href="license.html">License</a>
+      <!-- Add more project links here as needed -->
     </div>
   </div>
 
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>Echo0bsidian</h1>
+    <p><em>Helping non-technical users unlock powerful workflows</em></p>
+
+    <h2>Featured Projects</h2>
+    <div class="projects-container">
+
+      <!-- Project Card: Macro -->
+      <div class="project-card">
+        <h3>Word-KeywordInjector</h3>
+        <p>A beginner-friendly macro that embeds hidden keywords into Word footers for resume optimization. No coding required.</p>
+        <a href="Word-KeywordInjector.txt" download class="btn">📥 Download Macro</a>
+        <a href="injector.html" class="btn">🔗 Learn More</a>
+      </div>
+
+    </div>
+
+    <h2>About Me</h2>
+    <p>Hi! I make tools that help people automate boring stuff—especially if you’re not a coder. If you’ve ever felt stuck in Word or Excel, I’ve got your back. My goal is to make powerful workflows accessible to everyone, whether you're building a resume or just trying to save time.</p>
+
+    <footer>
+      Built with clarity · Shared with purpose · Echo0bsidian<br>
+      MIT Licensed · Ethically distributed
+    </footer>
+  </div>
+
+  <!-- JS for Dropdown Toggle -->
   <script>
-    function openModal() {
-      document.getElementById('tutorialModal').style.display = 'block';
+    function toggleMenu() {
+      const menu = document.getElementById('dropdownMenu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
     }
-    function closeModal() {
-      document.getElementById('tutorialModal').style.display = 'none';
-    }
+
+    window.addEventListener('click', function(e) {
+      const menu = document.getElementById('dropdownMenu');
+      const button = document.querySelector('.menu-button');
+      if (!menu.contains(e.target) && !button.contains(e.target)) {
+        menu.style.display = 'none';
+      }
+    });
   </script>
 
 </body>
